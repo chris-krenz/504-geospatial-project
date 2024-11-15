@@ -37,9 +37,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: pytest
-    - name: Report coverage
-      run: |
-        coverage run -m pytest
-        coverage report
-    - name: Profile code
-      run: python -m cProfile src/utils/test_matmul.py
+    # - name: Report coverage
+    #   run: |
+    #     coverage run -m pytest
+    #     coverage report
+    # - name: Profile code
+    #   run: python -m cProfile src/utils/test_matmul.py

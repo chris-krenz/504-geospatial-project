@@ -1,2 +1,7 @@
 __pycache__/
 .idea/
+.vscode/
+# data/
+other_data/
+venv/
+.DS_Store

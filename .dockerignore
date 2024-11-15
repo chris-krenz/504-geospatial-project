@@ -1,0 +1,8 @@
+other_data/
+venv/
+.git/
+.vscode/
+doc/
+examples/
+logs/
+.github/
