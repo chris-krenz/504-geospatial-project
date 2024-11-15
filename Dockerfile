@@ -11,4 +11,4 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Run the benchmark script
-CMD ["python", "src/benchmark.py"]
+CMD ["python", "src/main.py"]

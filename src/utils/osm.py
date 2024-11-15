@@ -1,7 +1,11 @@
+"""
+For experimenting with how to process .pbf files.
+"""
+
 import os
 import osmium
 
-from config import ROOT_DIR
+from CONFIG import ROOT_DIR
 
 
 class OSMHandler(osmium.SimpleHandler):
@@ -21,7 +25,7 @@ class OSMHandler(osmium.SimpleHandler):
 
 if __name__ == '__main__':
     handler = OSMHandler()
-    handler.apply_file(os.path.join(ROOT_DIR, 'data', 'us-virgin-islands-latest.osm.pbf'))
+    handler.apply_file(os.path.join(ROOT_DIR, 'other_data', 'us-virgin-islands-latest.osm.pbf'))
 
     for i, node in enumerate(handler.nodes):
         for key, value in node['tags'].items():

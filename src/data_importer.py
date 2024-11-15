@@ -1,9 +1,14 @@
-import osmium
+"""
+Imports data from either .pbf files (from OSM) or .csv
+TODO: Expand to other data types...
+"""
+
+import osmium  # used for parsing OSM (Open Street Map) files
 import csv
 import os
 from typing import List, Dict, Union
 
-# Define the structure of our data point
+
 class DataPoint:
     def __init__(self, latitude: float, longitude: float, zip_code: Union[str, int]):
         self.latitude = latitude
@@ -11,10 +16,10 @@ class DataPoint:
         self.zip_code = zip_code
 
     def as_vector(self):
-        return [self.latitude, self.longitude]  # Expand with more dimensions as needed
+        return [self.latitude, self.longitude]  # shoudl be able to add more dims here later
 
-# Factory for data ingestion
-class DataIngestionFactory:
+
+class DataIngestionFactory:  # trying to accommodate different data sources to increase potential dims
     @staticmethod
     def load_data(file_path: str) -> List[DataPoint]:
         if file_path.endswith('.csv'):
@@ -41,7 +46,6 @@ class DataIngestionFactory:
                 self.data = []
 
             def node(self, n):
-                # Filter only nodes with necessary tags if available, here simplified
                 if 'zip_code' in n.tags:
                     zip_code = n.tags.get('zip_code')
                     self.data.append(DataPoint(n.location.lat, n.location.lon, zip_code))

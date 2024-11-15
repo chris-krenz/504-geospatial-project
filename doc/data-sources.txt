@@ -1,9 +1,0 @@
-https://simplemaps.com/data/us-zips
-http://download.openstreetmap.fr/extracts/north-america/
-https://export.hotosm.org/v3/exports
-https://www.openstreetmap.org/export#map=12/42.3594/-71.0572
-
-
-# Other
-https://ngageoint.github.io/geopackage-pbf-js/
-https://community.openstreetmap.org/t/problem-downloading-data-from-hot-export-tool-osm/117075/5
