@@ -61,7 +61,7 @@ class ApproximateKDTree:
 # Standalone execution
 if __name__ == '__main__':
     # Sample file path (update with your actual file path)
-    file_path = os.path.join(ROOT_DIR, 'data', 'simplemaps_uszips_basicv1.86', 'uszips.csv')
+    file_path = os.path.join(ROOT_DIR, 'data', 'uszips.csv')
     data_points = DataIngestionFactory.load_data(file_path)
 
     # Initialize Approximate KD Tree

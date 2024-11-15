@@ -46,7 +46,7 @@ class MultiTableLSH:
 # Sample usage
 if __name__ == '__main__':
     # Load the data from a CSV or PBF file
-    file_path = os.path.join(ROOT_DIR, 'data', 'simplemaps_uszips_basicv1.86', 'uszips.csv')  # Update path as needed
+    file_path = os.path.join(ROOT_DIR, 'data', 'uszips.csv')  # Update path as needed
     data_points = DataIngestionFactory.load_data(file_path)
 
     # Initialize Multi-Table LSH with desired parameters

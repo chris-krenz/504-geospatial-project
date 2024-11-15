@@ -39,7 +39,7 @@ def benchmark(algorithm, data_points, num_queries=100, k=5):
 
 # Sample Usage
 if __name__ == '__main__':
-    file_path = os.path.join(ROOT_DIR, 'data', 'simplemaps_uszips_basicv1.86', 'uszips.csv')
+    file_path = os.path.join(ROOT_DIR, 'data', 'uszips.csv')
     data_points = DataIngestionFactory.load_data(file_path)
     
     # Multi-Table LSH
