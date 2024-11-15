@@ -8,7 +8,7 @@ from collections import defaultdict
 from data_importer import DataPoint, DataIngestionFactory
 import os
 
-from CONFIG import SAMPLE_DATA
+from config import SAMPLE_DATA
 
 
 class MultiTableLSH:

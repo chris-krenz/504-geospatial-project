@@ -7,7 +7,7 @@ from data_importer import DataPoint, DataIngestionFactory
 import heapq
 import os
 
-from CONFIG import SAMPLE_DATA
+from config import SAMPLE_DATA
 
 
 class ApproximateKDTree:

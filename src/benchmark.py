@@ -10,7 +10,7 @@ from data_importer import DataIngestionFactory
 import logging as log
 import os
 
-from CONFIG import SAMPLE_DATA
+from config import SAMPLE_DATA
 
 
 def brute_force_search(data_points, query_point, k=5):

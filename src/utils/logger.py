@@ -11,7 +11,7 @@ import threading
 from traceback import format_exc
 from datetime import datetime
 
-from CONFIG import ROOT_DIR
+from config import ROOT_DIR
 logs_dir = os.path.join(ROOT_DIR, 'logs')
 os.makedirs(logs_dir, exist_ok=True)
 

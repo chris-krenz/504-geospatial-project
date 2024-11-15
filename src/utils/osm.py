@@ -5,7 +5,7 @@ For experimenting with how to process .pbf files.
 import os
 import osmium
 
-from CONFIG import ROOT_DIR
+from config import ROOT_DIR
 
 
 class OSMHandler(osmium.SimpleHandler):
