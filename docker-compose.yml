@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    container_name: geospatial_benchmark
+    environment:
+      - PYTHONUNBUFFERED=1

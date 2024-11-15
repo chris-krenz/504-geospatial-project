@@ -2,6 +2,6 @@ __pycache__/
 .idea/
 .vscode/
 # data/
-data/other/
+other_data/
 venv/
 .DS_Store
