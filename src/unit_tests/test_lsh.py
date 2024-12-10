@@ -5,7 +5,7 @@ TODO: Develop more...
 import pytest
 import numpy as np
 from lsh import MultiTableLSH
-from data_importer import DataPoint
+from data_importers import DataPoint
 
 
 data_points = [

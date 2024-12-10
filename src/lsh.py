@@ -5,7 +5,7 @@ This is the Multi-Table LSH algo (discussed more in proposal)
 import numpy as np
 from sklearn.random_projection import GaussianRandomProjection  # only skleran package I'm currently using...
 from collections import defaultdict
-from data_importer import DataPoint, DataIngestionFactory
+from data_importers import DataPoint, DataIngestionFactory
 import os
 
 from config import SAMPLE_DATA
@@ -29,7 +29,7 @@ class MultiTableLSH:
                 hash_key = self._hash(vector, i)
                 self.hash_tables[i][hash_key].append(data_point)
 
-    def query(self, query_point: DataPoint, num_neighbors: int = 5):
+    def query(self, query_point: DataPoint, num_neighbors: int = 10):
         candidate_set = set()
         query_vector = query_point.as_vector()
 
