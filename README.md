@@ -1,9 +1,10 @@
 ## About
 
-This is a project for EC504 at Boston University.  This project uses Locality-Sensitive Hashing and KD-Trees to search geospatial data.  Specificaly, given latitude and longitude coordinates (and ultimately additional dimensions, such as elevation, height, etc.), the program will return zip codes near those coordinates. 
+This is a project for EC504 at Boston University.  This project uses Locality-Sensitive Hashing, KD-Trees, and R-Trees to search geospatial data.  Specificaly, given latitude and longitude coordinates, the program will return zip codes near those coordinates.  It also includes an interactive app.
 
+NOTE: Please see the submitted report for additional details about running this program.
 
-## Running with Docker
+## Running with Docker (benchmarker only)
 
 Additional information about installing Docker can be found here: https://docs.docker.com/engine/install/
 
@@ -13,13 +14,13 @@ With Docker installed, run the following command from the root directory to buil
 docker-compose up --build
 ```
 
-## Running with Python Installation
+## Running with Python Installation (for benchmarker and interactive app)
 
 ### Dependencies
 
 Additional information about installing Python can be found here: https://www.python.org/downloads/  
 
-(Recommend Python 3.10, though later versions will likely work as well.)
+(Strongly recommend Python 3.11, though later versions will likely work as well.)
 
 Run the following setup a virtual environment in the root directory.
 
@@ -43,10 +44,10 @@ pip install -r requirements.txt
 
 ### Running Program
 
-For now, the main entry point is the benchmark.py.  Run the following in the root directory to execute both the LSH and KD-Tree algorithms on some sample data (US zip codes and coordinates).  After a minute or so the program will print to the console their accuracies and run times. 
+The main entry point is the benchmark.py.  Run the following in the root directory to execute the LSH, KD-Tree, and R-Tree algorithms on some sample data (US zip codes and coordinates).  After a minute or so the program will print to the console their accuracies and run times. 
 
 ```console
-python src/benchmark.py
+python src/main.py
 ```
 
 ## Unit Tests
@@ -72,9 +73,9 @@ python -m coverage [report | html]
 
 ```console
 (venv) $ python src/benchmark.py
-INFO:root:Approximate KD Tree - Time: 0.00024s, Accuracy: 0.06
-INFO:root:Multi-Table LSH - Time: 0.03522s, Accuracy: 0.61
-INFO:root:R-Tree - Time: 0.00149s, Accuracy: 0.94
+INFO:root:Approximate KD Tree - Time: 0.00023s, Accuracy: 0.07
+INFO:root:Multi-Table LSH - Time: 0.03436s, Accuracy: 0.56
+INFO:root:R-Tree - Time: 0.00136s, Accuracy: 0.90
 ```
 
 ## Contributors
