@@ -7,8 +7,8 @@ import numpy as np
 from lsh import MultiTableLSH
 from kd_tree import ApproximateKDTree
 
-# from r_tree_manual import RTree
-from r_tree import RTree
+from r_tree_manual import RTree
+# from r_tree import RTree
 
 from data_importers import DataIngestionFactory
 import logging as log
@@ -52,25 +52,23 @@ def sample_data_benchmark():
     file_path = os.path.join(SAMPLE_DATA)
     data_points = DataIngestionFactory.load_data(file_path)
     
-    # Multi-Table LSH
-    lsh = MultiTableLSH(num_tables=3, hash_size=2)
-    lsh.insert(data_points)
-    
-    lsh_time, lsh_accuracy = benchmark(lsh, data_points)
-    log.info(f"Multi-Table LSH - Time: {lsh_time:.5f}s, Accuracy: {lsh_accuracy:.2f}")
-
-    # Approximate KD-Tree
+    # K-D Tree
     approx_kd_tree = ApproximateKDTree(data_points, max_depth=10)
-
     kd_time, kd_accuracy = benchmark(approx_kd_tree, data_points)
     log.info(f"Approximate KD Tree - Time: {kd_time:.5f}s, Accuracy: {kd_accuracy:.2f}")
 
-    # R-Tree
-    # r_tree = RTree(max_children=4)
-    # for point in data_points:
-    #     mbr = [point.longitude, point.latitude, point.longitude, point.latitude]
-    #     r_tree.insert(point, mbr)
-    r_tree = RTree()
+    # LSH #
+    lsh = MultiTableLSH(num_tables=3, hash_size=2)
+    lsh.insert(data_points)
+    lsh_time, lsh_accuracy = benchmark(lsh, data_points)
+    log.info(f"Multi-Table LSH - Time: {lsh_time:.5f}s, Accuracy: {lsh_accuracy:.2f}")
+
+    # R-Tree #
+    # max_children is the max num of children the node can hold before needing to split...
+    # adjusting this allows you to choose a trade off between speed and accuracy
+    # values around 128 will approach 100% accuracy but will be slighly slower
+    # min value is 2, which yields an accuracy of about 43%.
+    r_tree = RTree(max_children=64)  
     r_tree.insert(data_points)
 
     rtree_time, rtree_accuracy = benchmark(r_tree, data_points)

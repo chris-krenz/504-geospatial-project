@@ -5,7 +5,8 @@ import webbrowser
 from data_importers import DataIngestionFactory, DataPoint
 from lsh import MultiTableLSH
 from kd_tree import ApproximateKDTree
-from r_tree import RTree
+# from r_tree import RTree
+from r_tree_manual import RTree
 import os
 
 from config import SAMPLE_DATA

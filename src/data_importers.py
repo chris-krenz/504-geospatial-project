@@ -13,13 +13,17 @@ from typing import List, Dict, Union
 
 
 class DataPoint:
-    def __init__(self, latitude: float, longitude: float, zip_code: Union[str, int]):
-        self.latitude = latitude
-        self.longitude = longitude
-        self.zip_code = zip_code
+    def __init__(self, latitude: float, longitude: float, zip_code: Union[str, int], 
+                #  timezone: str='', population: int=0
+                 ):
+        self.latitude   = latitude
+        self.longitude  = longitude
+        self.zip_code   = zip_code
+        # self.timezone   = timezone
+        # self.population = population
 
     def as_vector(self):
-        return [self.latitude, self.longitude]  # shoudl be able to add more dims here later
+        return [self.longitude, self.latitude]  # shoudl be able to add more dims here later
 
 
 class DataIngestionFactory:  # trying to accommodate different data sources to increase potential dims
@@ -38,7 +42,13 @@ class DataIngestionFactory:  # trying to accommodate different data sources to i
         with open(file_path, 'r') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                data.append(DataPoint(float(row['lat']), float(row['lng']), row['zip']))
+                data.append(DataPoint(
+                        latitude=float(row['lat']), 
+                        longitude=float(row['lng']), 
+                        zip_code=row['zip'],
+                        # timezone=row['timezone'] if row['timezone'] else 'Unknown',
+                        # population=int(row['population']) if row['population'].isdigit() else 0
+                    ))
         return data
 
     @staticmethod

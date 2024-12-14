@@ -55,6 +55,7 @@ if __name__ == '__main__':
 
     # test data
     query_point = DataPoint(latitude=18.34, longitude=-64.92, zip_code=None)
+    # query_point = DataPoint(latitude=42.0, longitude=-71.0, zip_code=None, population=10_000, timezone='America/New_York')
     results = lsh.query(query_point)
 
     for result in results:

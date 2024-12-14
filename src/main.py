@@ -12,7 +12,13 @@ def main():
 
     logger.config_logger()
 
+    print('\nRunning benchmark...')
+
     sample_data_benchmark()
+
+    print('\nResults printed. Suggest running the app.py script next for an interactive experience.')
+
+    print('\nProgram complete.')
 
 
 if __name__ == '__main__':
