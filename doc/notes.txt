@@ -8,8 +8,3 @@ https://www.openstreetmap.org/export#map=12/42.3594/-71.0572
 # Other
 https://ngageoint.github.io/geopackage-pbf-js/
 https://community.openstreetmap.org/t/problem-downloading-data-from-hot-export-tool-osm/117075/5
-
-
-# Questions
-What size area do I need to search?  Entire world or even US becomes infeasible...
-Should I be packaging a tiny dataset with the code for you to run it?

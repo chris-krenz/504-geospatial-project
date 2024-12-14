@@ -1,0 +1,3 @@
+2024-12-13 20:35 MainThread INFO Approximate KD Tree - Time: 0.00024s, Accuracy: 0.07
+2024-12-13 20:35 MainThread INFO Multi-Table LSH - Time: 0.03432s, Accuracy: 0.62
+2024-12-13 20:35 MainThread INFO R-Tree - Time: 0.00153s, Accuracy: 0.91
