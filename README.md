@@ -72,8 +72,9 @@ python -m coverage [report | html]
 
 ```console
 (venv) $ python src/benchmark.py
-Multi-Table LSH - Time: 0.04035s, Accuracy: 0.55
-Approximate KD Tree - Time: 0.00011s, Accuracy: 0.08
+INFO:root:Approximate KD Tree - Time: 0.00024s, Accuracy: 0.06
+INFO:root:Multi-Table LSH - Time: 0.03522s, Accuracy: 0.61
+INFO:root:R-Tree - Time: 0.00149s, Accuracy: 0.94
 ```
 
 ## Contributors

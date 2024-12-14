@@ -1,43 +1,42 @@
 """
-This is the main script that runs all algos and compares tehir accuracy and run times.
+This is one of the main scripts that runs all algos and compares tehir accuracy and run times.
+This is also the script that is run via Docker.
 """
 
+import os
 import time
 import numpy as np
 from lsh import MultiTableLSH
 from kd_tree import ApproximateKDTree
-
-from r_tree_manual import RTree
-# from r_tree import RTree
+from r_tree import RTree
 
 from data_importers import DataIngestionFactory
 import logging as log
-import os
 
 from config import SAMPLE_DATA
 
 
 def brute_force_search(data_points, query_point, k=5):
-    """Perform brute force nearest neighbor search."""
+    """Brute search against which other algos are benchmarked, i.e. the 'ground truth'..."""
     return sorted(data_points, key=lambda p: np.linalg.norm(np.array(p.as_vector()) - np.array(query_point.as_vector())))[:k]
 
 def benchmark(algorithm, data_points, num_queries=100, k=5):
-    """Benchmark the algorithm for speed and accuracy."""
+    """Assess speed and accuracy..."""
     query_points = np.random.choice(data_points, num_queries, replace=False)
     
     total_time = 0
     correct_retrievals = 0  # Relative to brute force ground truth.
 
     for query_point in query_points:
-        # Ground truth via brute force
+        # brute foce...
         ground_truth = set(p.zip_code for p in brute_force_search(data_points, query_point, k))
 
-        # Measure query time
+        # Measure time
         start_time = time.time()
         results = algorithm.query(query_point, k)
         total_time += time.time() - start_time
 
-        # Measure accuracy
+        # Measure acc
         retrieved_zips = set(p.zip_code for p in results)
         correct_retrievals += len(retrieved_zips & ground_truth) / k
 
@@ -48,7 +47,7 @@ def benchmark(algorithm, data_points, num_queries=100, k=5):
 
 
 def sample_data_benchmark():
-    """Benchmark LSH, KD-Tree, and R-Tree algorithms."""
+    """Benchmark LSH, KD-Tree, and R-Tree algos..."""
     file_path = os.path.join(SAMPLE_DATA)
     data_points = DataIngestionFactory.load_data(file_path)
     

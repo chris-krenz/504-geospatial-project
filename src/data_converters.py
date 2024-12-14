@@ -1,4 +1,8 @@
-import osmium
+"""
+File mostly just used for experimenting and preprocessing...
+"""
+
+import osmium  # used for parsing OSM files...
 import csv
 import os
 
@@ -21,8 +25,8 @@ class PBFToCSVConverter:
             self.data_points = []
 
         def node(self, n):
-            print(f"Node ID: {n.id}, Tags: {dict(n.tags)}")  # Log all tags for inspection
-            if 'zip_code' in n.tags:  # Adjust this line if 'zip_code' is not the actual tag
+            print(f"Node ID: {n.id}, Tags: {dict(n.tags)}") 
+            if 'zip_code' in n.tags: 
                 self.data_points.append(DataPoint(
                     latitude=n.location.lat,
                     longitude=n.location.lon,
@@ -30,18 +34,15 @@ class PBFToCSVConverter:
                 ))
 
     def convert(self):
-        # Parse the PBF file
+
         handler = self.OSMHandler()
         print(f"Processing PBF file: {self.input_pbf}")
         handler.apply_file(self.input_pbf)
 
-        # Write to CSV
         print(f"Writing to CSV file: {self.output_csv}")
         with open(self.output_csv, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            # Write header
             writer.writerow(['latitude', 'longitude', 'zip_code'])
-            # Write data
             for dp in handler.data_points:
                 writer.writerow([dp.latitude, dp.longitude, dp.zip_code])
 
@@ -49,10 +50,8 @@ class PBFToCSVConverter:
 
 
 if __name__ == "__main__":
-    # Define input PBF and output CSV paths
-    input_pbf_path = os.path.join("other_data", "us-virgin-islands-latest.osm.pbf")  # Update with your PBF file path
-    output_csv_path = os.path.join("other_data", "us-virgin-islands-latest.csv")         # Desired output CSV file path
+    input_pbf_path = os.path.join("other_data", "us-virgin-islands-latest.osm.pbf") 
+    output_csv_path = os.path.join("other_data", "us-virgin-islands-latest.csv") 
 
-    # Convert PBF to CSV
     converter = PBFToCSVConverter(input_pbf=input_pbf_path, output_csv=output_csv_path)
     converter.convert()

@@ -3,7 +3,7 @@ Imports data from either .pbf files (from OSM) or .csv
 
 https://mygeodata.cloud/converter/pbf-to-csv
 
-TODO: Expand to other data types...
+NOTE: I experimented with including timezone and population data, but it was too sparse to be useful...
 """
 
 import osmium  # used for parsing OSM (Open Street Map) files
@@ -25,8 +25,8 @@ class DataPoint:
     def as_vector(self):
         return [self.longitude, self.latitude]  # shoudl be able to add more dims here later
 
-
-class DataIngestionFactory:  # trying to accommodate different data sources to increase potential dims
+#... tryin to accommodate various data source types...
+class DataIngestionFactory: 
     @staticmethod
     def load_data(file_path: str) -> List[DataPoint]:
         if file_path.endswith('.csv'):

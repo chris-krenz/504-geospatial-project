@@ -1,5 +1,5 @@
 # Use an official Python image as the base
-FROM python:3.10
+FROM python:3.11
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,4 +11,4 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Run the benchmark script
-CMD ["python", "src/main.py"]
+CMD ["python", "src/benchmark.py"]

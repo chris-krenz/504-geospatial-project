@@ -1,3 +1,9 @@
+"""
+Implementation of K-D Trees structure.
+Slide 4 of the presentation offers a useful visual depiction:
+https://docs.google.com/presentation/d/1cgaXUtRxTxCplw3CdPCHHPpMtw8CO0HeHZIf2TlUmZg/edit?usp=sharing
+"""
+
 import numpy as np
 from data_importers import DataPoint, DataIngestionFactory
 import heapq
@@ -31,11 +37,11 @@ class ApproximateKDTree:
 
     def query(self, query_point, num_neighbors=5):
         """Query the KD-Tree using priority search for the k nearest neighbors."""
-        heap = []  # Max heap for the k nearest neighbors
-        priority_queue = []  # Min heap for priority-based traversal
+        heap = []                      # Max heap for k 'nearest neighbors'
+        priority_queue = []            # Min heap for priority-based traversal...
         unique_id = itertools.count()  # Unique identifier for each node
 
-        # Add the root node to the priority queue
+        # Add root node to priority queue... (prioritized by proximity to query point)
         heapq.heappush(priority_queue, (0, next(unique_id), self.tree, 0))  # (priority, id, node, depth)
 
         while priority_queue:
@@ -44,25 +50,25 @@ class ApproximateKDTree:
             if node is None or depth > self.max_depth:
                 continue
 
-            # Calculate distance to current node
+            # Calc dist to curr node
             dist = self._distance(query_point, node['point'])
             if len(heap) < num_neighbors:
                 heapq.heappush(heap, (-dist, node['point']))
             elif dist < -heap[0][0]:
                 heapq.heapreplace(heap, (-dist, node['point']))
 
-            # Determine the splitting axis
+            # Determine split axis (i.e. where rect split to form next smaller rect...)
             axis = depth % 2
             diff = query_point.as_vector()[axis] - node['point'].as_vector()[axis]
 
-            # Add child nodes to the priority queue
+            # Add child nodes to priority queue
             nearer = node['left'] if diff < 0 else node['right']
             farther = node['right'] if diff < 0 else node['left']
             heapq.heappush(priority_queue, (0, next(unique_id), nearer, depth + 1))
             if abs(diff) < -heap[0][0] or len(heap) < num_neighbors:
                 heapq.heappush(priority_queue, (abs(diff), next(unique_id), farther, depth + 1))
 
-        # Extract results sorted by distance
+        # Extract results sorted by dist...
         return [item[1] for item in sorted(heap, key=lambda x: -x[0])]
 
 

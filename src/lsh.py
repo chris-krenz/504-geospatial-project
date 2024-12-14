@@ -1,5 +1,7 @@
 """
-This is the Multi-Table LSH algo (discussed more in proposal)
+Implementation of Multi-Table LSH algo (discussed more in proposal)
+Slide 5 of the presentation offers a useful visual depiction:
+https://docs.google.com/presentation/d/1cgaXUtRxTxCplw3CdPCHHPpMtw8CO0HeHZIf2TlUmZg/edit?usp=sharing
 """
 
 import numpy as np
@@ -14,11 +16,14 @@ from config import SAMPLE_DATA
 class MultiTableLSH:
     def __init__(self, num_tables: int, hash_size: int):
         self.num_tables = num_tables
-        self.hash_size = hash_size
+        self.hash_size = hash_size  # each hash table maps a hash key to a set of pts...
         self.hash_tables = [defaultdict(list) for _ in range(num_tables)]
+        # the projection reduces dimensionality...
         self.projections = [GaussianRandomProjection(n_components=hash_size) for _ in range(num_tables)]
 
     def _hash(self, vector, table_index):
+        # project to lower dims and hash
+        # KEY concept: pts close in original space tend to produce similar hash keys here...
         projected = self.projections[table_index].fit_transform([vector])[0]
         return tuple((projected > 0).astype(int))
 
@@ -30,6 +35,7 @@ class MultiTableLSH:
                 self.hash_tables[i][hash_key].append(data_point)
 
     def query(self, query_point: DataPoint, num_neighbors: int = 10):
+        # query pt by computing hash keys to retrieve candidates...
         candidate_set = set()
         query_vector = query_point.as_vector()
 
@@ -37,6 +43,7 @@ class MultiTableLSH:
             hash_key = self._hash(query_vector, i)
             candidate_set.update(self.hash_tables[i].get(hash_key, []))
 
+        # return closest matches..
         neighbors = sorted(
             candidate_set,
             key=lambda point: np.linalg.norm(np.array(point.as_vector()) - np.array(query_vector))
